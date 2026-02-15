@@ -56,27 +56,27 @@ export default function MarketplacePage() {
     <div className="min-h-screen bg-black text-white">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-gray-900">
-        <div className="container mx-auto px-8 py-6 flex items-center justify-between">
+        <div className="container mx-auto px-8 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 opacity-80 hover:opacity-100 transition-opacity">
             <Image 
               src="/logo.png" 
               alt="Patas4Land" 
-              width={48} 
-              height={48}
+              width={40} 
+              height={40}
             />
           </Link>
           
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-6">
             <Link 
               href="/" 
-              className="text-sm tracking-wider uppercase opacity-70 hover:opacity-100 transition-opacity"
+              className="text-sm tracking-wider uppercase text-gray-400 hover:text-white transition-colors"
             >
               Home
             </Link>
             <Link 
               href="https://t.me/pata_monad_bot" 
               target="_blank"
-              className="px-6 py-2 bg-yellow-500 text-black rounded-full text-sm font-semibold hover:bg-yellow-400 transition-all"
+              className="px-5 py-2 bg-yellow-500 text-black rounded-full text-sm font-semibold hover:bg-yellow-400 transition-all"
             >
               Start Selling
             </Link>
@@ -87,12 +87,12 @@ export default function MarketplacePage() {
       <div className="pt-32 pb-24 px-8">
         <div className="container mx-auto">
           {/* Page Header */}
-          <div className="max-w-4xl mx-auto mb-16 text-center">
-            <p className="text-xs tracking-[0.3em] uppercase text-gray-600 mb-6">
+          <div className="max-w-4xl mx-auto mb-12 text-center">
+            <p className="text-xs tracking-[0.3em] uppercase text-gray-600 mb-4">
               {filteredItems.length} Sellers Online
             </p>
             
-            <h1 className="text-6xl md:text-8xl font-light mb-8">
+            <h1 className="text-4xl md:text-5xl font-light mb-6">
               Browse
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-yellow-400">
@@ -100,7 +100,7 @@ export default function MarketplacePage() {
               </span>
             </h1>
 
-            <p className="text-xl text-gray-500 leading-loose">
+            <p className="text-base md:text-lg text-gray-500 leading-loose">
               Premium foot content from verified sellers worldwide
             </p>
           </div>
@@ -167,10 +167,10 @@ export default function MarketplacePage() {
                 <div className="inline-flex items-center justify-center w-24 h-24 rounded-full border border-gray-900 mb-8">
                   <span className="text-4xl opacity-50">👀</span>
                 </div>
-                <h3 className="text-4xl font-light mb-6">
+                <h3 className="text-3xl font-light mb-4">
                   {activeCategory === 'all' ? 'No listings yet' : `No ${activeCategory} content found`}
                 </h3>
-                <p className="text-gray-500 text-lg leading-loose mb-12">
+                <p className="text-gray-500 leading-loose mb-10">
                   Be the first seller in this category
                 </p>
               </div>
@@ -316,13 +316,13 @@ export default function MarketplacePage() {
             <div className="relative py-20 px-12 rounded-3xl border border-gray-900 overflow-hidden">
               <div className="relative z-10">
                 <div className="text-5xl mb-6">🌳</div>
-                <h3 className="text-4xl font-light mb-4">
+                <h3 className="text-3xl font-light mb-4">
                   Start selling today
                 </h3>
-                <p className="text-gray-500 text-lg leading-loose mb-8">
+                <p className="text-gray-500 leading-loose mb-8">
                   Upload your content via Telegram. Set your price. Get paid instantly.
                   <br />
-                  <span className="text-green-500 font-medium">10% supports reforestation.</span>
+                  <span className="text-green-500 font-medium">7% supports reforestation.</span>
                 </p>
                 <Link 
                   href="https://t.me/pata_monad_bot"

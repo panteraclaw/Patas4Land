@@ -8,13 +8,13 @@ export default function FailurePage() {
     <div className="min-h-screen bg-black text-white flex flex-col">
       {/* Nav */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-gray-900">
-        <div className="container mx-auto px-8 py-6 flex items-center justify-between">
+        <div className="container mx-auto px-8 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 opacity-80 hover:opacity-100 transition-opacity">
             <Image 
               src="/logo.png" 
               alt="Patas4Land" 
-              width={48} 
-              height={48}
+              width={40} 
+              height={40}
             />
           </Link>
         </div>

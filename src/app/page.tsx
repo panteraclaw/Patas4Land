@@ -4,19 +4,19 @@ import Link from 'next/link'
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Navigation */}
+      {/* Navigation - More compact */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-gray-900">
-        <div className="container mx-auto px-8 py-6 flex items-center justify-between">
+        <div className="container mx-auto px-8 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
             <Image 
               src="/logo.png" 
               alt="Patas4Land" 
-              width={48} 
-              height={48}
+              width={40} 
+              height={40}
             />
           </Link>
           
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-6">
             <Link 
               href="/marketplace" 
               className="text-sm tracking-wider uppercase text-gray-400 hover:text-white transition-colors"
@@ -26,7 +26,7 @@ export default function HomePage() {
             <Link 
               href="https://t.me/pata_monad_bot" 
               target="_blank"
-              className="px-6 py-2 bg-yellow-500 text-black rounded-full text-sm font-semibold hover:bg-yellow-400 transition-all"
+              className="px-5 py-2 bg-yellow-500 text-black rounded-full text-sm font-semibold hover:bg-yellow-400 transition-all"
             >
               Start Selling
             </Link>
@@ -34,17 +34,17 @@ export default function HomePage() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-8">
+      {/* Hero Section - Better vertical spacing */}
+      <section className="relative flex items-center justify-center px-8" style={{ minHeight: 'calc(100vh - 72px)', paddingTop: '72px' }}>
         <div className="container mx-auto">
           <div className="max-w-5xl mx-auto text-center">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 border border-gray-800 rounded-full mb-8">
+            {/* Badge - Better positioned */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 border border-gray-800 rounded-full mb-10">
               <span className="text-yellow-500 text-sm">●</span>
               <span className="text-gray-400 text-sm">Premium Foot Content Marketplace</span>
             </div>
 
-            {/* Main headline - Reduced size */}
+            {/* Main headline */}
             <h1 className="text-5xl md:text-7xl font-light tracking-tight leading-[0.9] mb-8">
               Sell your
               <br />
@@ -84,10 +84,10 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* Token info + Reforestation */}
+            {/* Token info + Reforestation - Fixed fees */}
             <div className="mt-16 pt-8 border-t border-gray-900 flex flex-col sm:flex-row items-center justify-center gap-8">
               <div className="text-sm text-gray-600">
-                <span className="text-green-500">3%</span> of sales → reforestation
+                <span className="text-green-500">7%</span> of sales → reforestation
               </div>
               <div className="text-gray-800">•</div>
               <div className="text-sm text-gray-600">
@@ -168,7 +168,7 @@ export default function HomePage() {
                 {
                   num: '02',
                   title: 'Set Your Price',
-                  desc: 'Choose your price in USDC. Platform keeps 7%, 3% goes to trees. You keep 90%.'
+                  desc: 'Choose your price in USDC. Platform keeps 3%, 7% goes to trees. You keep 90%.'
                 },
                 {
                   num: '03',
@@ -200,15 +200,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Stats */}
+      {/* Stats - Fixed fees */}
       <section className="py-24 px-8 border-t border-gray-900">
         <div className="container mx-auto">
           <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
               { value: '$0', label: 'Setup Cost' },
               { value: '90%', label: 'Your Earnings' },
-              { value: '7%', label: 'Platform Fee' },
-              { value: '3%', label: 'Reforestation' }
+              { value: '3%', label: 'Platform Fee' },
+              { value: '7%', label: 'Reforestation' }
             ].map((stat, i) => (
               <div key={i} className="text-center">
                 <div className="text-4xl font-light mb-2 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-600">
