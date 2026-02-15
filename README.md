@@ -1,9 +1,33 @@
-# Martina Gorozo Store
+# 🐾 Patas4Land
 
-## Project Status
-- **Phase 1:** Completed (Museum Aesthetic, Horizontal Grimoire, Basic E-commerce Structure).
-- **Phase 2:** Completed (Tattoos Integration, Mercado Pago Payments, "Spyglass" Magnifier).
-- **Phase 3:** In Progress (Crypto Auth, Story Protocol IP, On-chain Sales).
+**Fetish for Forest** - Agent-powered feet pic marketplace with 10% to reforestation
+
+## Concept
+
+Sellers send photos via Telegram → OpenClaw agent lists them → Buyers purchase with crypto → 10% goes to tree planting
+
+## Stack
+
+- Next.js 16 + React 19
+- Privy (wallet auth)
+- wagmi/viem (Web3)
+- Drizzle ORM + Neon DB
+- Vercel Blob (uploads)
+
+## MVP Features
+
+- 🤖 Agent-powered (bot coming soon)
+- 💳 Crypto payments
+- 🌲 10% charity split
+- 🎨 Noir cartoonish UI
+- 🔐 Wallet login
+
+## Hackathon
+
+Moltiverse by Monad + nad.fun
+- Agent Track ✅
+- Token Track ✅ ($PATAS)
 
 ---
-*Quantum Leap Architecture*
+
+Built with 🐆 by Frutero Club
