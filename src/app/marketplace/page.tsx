@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Link from 'link'
+import Link from 'next/link'
 
 // TODO: Replace with real data from DB
 const MOCK_LISTINGS = [
