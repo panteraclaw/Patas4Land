@@ -3,152 +3,215 @@ import Link from 'next/link'
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
-      {/* Header - Minimal elegante */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-gray-800">
-        <nav className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3 group">
+    <div className="min-h-screen bg-black text-white">
+      {/* Navigation - Ultra minimal */}
+      <nav className="fixed top-0 left-0 right-0 z-50 mix-blend-difference">
+        <div className="container mx-auto px-8 py-6 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-3 opacity-80 hover:opacity-100 transition-opacity">
             <Image 
-              src="/logo.jpg" 
+              src="/logo-v2.png" 
               alt="Patas4Land" 
-              width={60} 
-              height={60}
-              className="transition-transform group-hover:scale-105"
+              width={48} 
+              height={48}
+              className="invert"
             />
-            <span className="text-xl font-bold tracking-tight">PATAS4LAND</span>
           </Link>
           
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-8">
             <Link 
               href="/marketplace" 
-              className="text-gray-400 hover:text-white transition-colors font-medium"
+              className="text-sm tracking-wider uppercase opacity-70 hover:opacity-100 transition-opacity"
             >
-              Explore
+              Browse
             </Link>
             <Link 
               href="https://t.me/pata_monad_bot" 
               target="_blank"
-              className="px-5 py-2 bg-yellow-500 text-black rounded-full hover:bg-yellow-400 transition-all font-semibold text-sm"
+              className="px-6 py-2 border border-white/30 rounded-full text-sm tracking-wider uppercase hover:bg-white hover:text-black transition-all"
             >
-              Sell Content
+              List Content
             </Link>
           </div>
-        </nav>
-      </header>
+        </div>
+      </nav>
 
-      {/* Hero - Noir dramático */}
-      <section className="relative pt-32 pb-20 px-6">
+      {/* Hero Section - Cinematográfico */}
+      <section className="relative min-h-screen flex items-center justify-center px-8">
         <div className="container mx-auto">
-          <div className="max-w-4xl">
-            {/* Badge discreto */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 border border-gray-800 rounded-full mb-8">
-              <span className="text-yellow-500 text-sm">●</span>
-              <span className="text-gray-400 text-sm">Anonymous • Secure • Premium</span>
-            </div>
-
-            {/* Headline impactante */}
-            <h1 className="text-6xl md:text-8xl font-bold tracking-tight leading-none mb-6">
-              Your{' '}
-              <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-600">
-                secret
-              </span>
-              <br />
-              desires,
-              <br />
-              <span className="text-gray-500">monetized.</span>
-            </h1>
-
-            <p className="text-xl text-gray-400 leading-relaxed max-w-2xl mb-10">
-              Premium foot content marketplace. Discreet, decentralized, exclusive. 
-              No judgment. Just quality.
+          <div className="max-w-5xl mx-auto text-center">
+            {/* Overline */}
+            <p className="text-sm tracking-[0.3em] uppercase text-gray-500 mb-12">
+              Anonymous Marketplace
             </p>
 
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            {/* Main headline - Dramático */}
+            <h1 className="text-7xl md:text-9xl font-light tracking-tight leading-[0.9] mb-12">
+              Your
+              <br />
+              <span className="font-serif italic">secrets</span>
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-200">
+                worth
+              </span>
+              <br />
+              <span className="font-light text-gray-600">gold.</span>
+            </h1>
+
+            {/* Subheadline */}
+            <p className="text-xl md:text-2xl text-gray-400 font-light leading-relaxed max-w-3xl mx-auto mb-16">
+              A private marketplace where desire meets discretion.
+              <br />
+              Upload. Price. Earn. Repeat.
+            </p>
+
+            {/* CTA - Minimal */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <Link 
                 href="/marketplace"
-                className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-black rounded-full hover:bg-yellow-500 transition-all font-semibold text-lg"
+                className="group relative px-10 py-4 overflow-hidden"
               >
-                Browse Collection
-                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+                <div className="absolute inset-0 bg-white"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-500 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+                <span className="relative z-10 text-black font-medium tracking-wide">
+                  Enter the Vault
+                </span>
               </Link>
               
               <Link 
                 href="https://t.me/pata_monad_bot"
                 target="_blank"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gray-900 hover:bg-gray-800 border border-gray-800 rounded-full transition-all font-semibold text-lg"
+                className="px-10 py-4 border border-gray-800 hover:border-gray-600 transition-colors font-medium tracking-wide"
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/>
-                </svg>
-                Start Selling
+                Become a Seller
               </Link>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 mt-16 pt-12 border-t border-gray-900">
-              <div>
-                <div className="text-3xl font-bold text-yellow-500">100%</div>
-                <div className="text-sm text-gray-500 mt-1">Anonymous</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold">$0</div>
-                <div className="text-sm text-gray-500 mt-1">Setup Fee</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold">10%</div>
-                <div className="text-sm text-gray-500 mt-1">Platform Cut</div>
-              </div>
+            {/* Impact statement - Reforestation badge */}
+            <div className="mt-20 pt-12 border-t border-gray-900">
+              <p className="text-sm text-gray-600 leading-loose">
+                <span className="text-green-500">10%</span> of every sale plants trees.
+                <br />
+                Because even secrets can grow forests.
+              </p>
             </div>
           </div>
         </div>
 
-        {/* Gradient Overlay sutil */}
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-yellow-500/5 to-transparent pointer-events-none" />
+        {/* Ambient gradient */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-amber-500/3 rounded-full blur-[150px] pointer-events-none" />
       </section>
 
-      {/* How It Works - Elegante minimalista */}
-      <section className="py-24 px-6 bg-gradient-to-b from-black to-gray-950">
+      {/* Value Props - Grid minimalista */}
+      <section className="py-32 px-8 border-t border-gray-900">
         <div className="container mx-auto">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Three steps. <span className="text-gray-500">Zero bullshit.</span>
-            </h2>
-            <p className="text-gray-400 text-lg">
-              From content to crypto in under 60 seconds.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-16">
             {[
               {
-                num: '01',
-                title: 'Send Content',
-                desc: 'Drop your best shot in our Telegram bot. No sign-up, no forms.',
-                icon: '📸'
+                label: 'Anonymous',
+                value: 'No KYC. No tracking. Pure discretion.',
               },
               {
-                num: '02',
-                title: 'Set Your Price',
-                desc: 'Name your price in USDC. You keep 90%. We handle the rest.',
-                icon: '💰'
+                label: 'Instant Payouts',
+                value: 'Crypto settlements in seconds. You keep 90%.',
               },
               {
-                num: '03',
-                title: 'Get Paid',
-                desc: 'Instant blockchain payments. Anonymous. Borderless. Yours.',
-                icon: '⚡'
+                label: 'Premium Only',
+                value: 'Curated marketplace. Quality over quantity.',
               }
-            ].map((step) => (
-              <div key={step.num} className="group relative">
-                <div className="absolute -inset-px bg-gradient-to-b from-yellow-500/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="relative bg-gray-900 border border-gray-800 rounded-2xl p-8 hover:border-gray-700 transition-all">
-                  <div className="text-5xl mb-6">{step.icon}</div>
-                  <div className="text-yellow-500 text-sm font-mono mb-2">{step.num}</div>
-                  <h3 className="text-2xl font-bold mb-3">{step.title}</h3>
-                  <p className="text-gray-400 leading-relaxed">{step.desc}</p>
+            ].map((item, i) => (
+              <div key={i} className="group">
+                <div className="mb-4 text-xs tracking-[0.3em] uppercase text-gray-600">
+                  {String(i + 1).padStart(2, '0')}
+                </div>
+                <h3 className="text-3xl font-light mb-4 group-hover:text-amber-400 transition-colors">
+                  {item.label}
+                </h3>
+                <p className="text-gray-500 leading-loose">
+                  {item.value}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works - Cinematográfico */}
+      <section className="py-32 px-8 bg-gradient-to-b from-black via-gray-950 to-black">
+        <div className="container mx-auto">
+          <div className="max-w-4xl mx-auto">
+            {/* Section header */}
+            <div className="mb-24 text-center">
+              <p className="text-xs tracking-[0.3em] uppercase text-gray-600 mb-6">
+                Process
+              </p>
+              <h2 className="text-5xl md:text-6xl font-light">
+                Three steps to
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-yellow-400">
+                  financial freedom
+                </span>
+              </h2>
+            </div>
+
+            {/* Steps */}
+            <div className="space-y-24">
+              {[
+                {
+                  num: '01',
+                  title: 'Upload via Telegram',
+                  desc: 'Send your content to our bot. No app downloads. No personal info required.'
+                },
+                {
+                  num: '02',
+                  title: 'Set Your Price',
+                  desc: 'Name your terms. USDC pricing. Blockchain-secured transactions.'
+                },
+                {
+                  num: '03',
+                  title: 'Withdraw Anytime',
+                  desc: 'Instant crypto payouts. No minimum. No delays. Your wallet, your rules.'
+                }
+              ].map((step, i) => (
+                <div 
+                  key={i} 
+                  className="relative pl-32 border-l border-gray-900 hover:border-amber-500/30 transition-colors group"
+                >
+                  <div className="absolute left-0 top-0 -translate-x-1/2 w-20 h-20 rounded-full bg-black border border-gray-900 group-hover:border-amber-500/50 flex items-center justify-center transition-colors">
+                    <span className="text-xs tracking-wider text-gray-600 group-hover:text-amber-500">
+                      {step.num}
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="text-3xl font-light mb-4">
+                      {step.title}
+                    </h3>
+                    <p className="text-gray-500 text-lg leading-loose">
+                      {step.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Social Proof - Minimal stats */}
+      <section className="py-32 px-8 border-t border-gray-900">
+        <div className="container mx-auto">
+          <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12">
+            {[
+              { value: '$0', label: 'Setup Cost' },
+              { value: '90%', label: 'Your Cut' },
+              { value: '10%', label: 'For Trees' },
+              { value: '< 60s', label: 'Time to List' }
+            ].map((stat, i) => (
+              <div key={i} className="text-center">
+                <div className="text-5xl font-light mb-3 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-600">
+                  {stat.value}
+                </div>
+                <div className="text-xs tracking-[0.2em] uppercase text-gray-600">
+                  {stat.label}
                 </div>
               </div>
             ))}
@@ -156,110 +219,66 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why Choose Us - Noir con toques gold */}
-      <section className="py-24 px-6 relative overflow-hidden">
+      {/* Final CTA - Full bleed dramático */}
+      <section className="relative py-40 px-8 overflow-hidden">
         <div className="container mx-auto relative z-10">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-16 items-center">
-              <div>
-                <h2 className="text-5xl font-bold mb-6">
-                  Discreet.
-                  <br />
-                  <span className="text-gray-500">Decentralized.</span>
-                  <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-600">
-                    Exclusive.
-                  </span>
-                </h2>
-                <p className="text-xl text-gray-400 leading-relaxed mb-8">
-                  We don't ask questions. We don't judge. We just provide the infrastructure 
-                  for creators to monetize their craft with dignity and anonymity.
-                </p>
-                <Link 
-                  href="/marketplace"
-                  className="inline-flex items-center gap-2 text-yellow-500 hover:text-yellow-400 font-semibold group"
-                >
-                  Explore the marketplace
-                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { icon: '🔒', label: 'End-to-end encrypted' },
-                  { icon: '💳', label: 'Crypto payments only' },
-                  { icon: '🎭', label: 'Full anonymity' },
-                  { icon: '⚡', label: 'Instant settlements' }
-                ].map((feature, i) => (
-                  <div 
-                    key={i}
-                    className="bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-yellow-500/50 transition-all"
-                  >
-                    <div className="text-3xl mb-3">{feature.icon}</div>
-                    <div className="text-sm text-gray-400">{feature.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Ambient glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-3xl pointer-events-none" />
-      </section>
-
-      {/* CTA Final - Impactante */}
-      <section className="py-32 px-6 relative">
-        <div className="container mx-auto">
-          <div className="max-w-4xl mx-auto text-center relative z-10">
-            <h2 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
-              Ready to turn curiosity
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-6xl md:text-8xl font-light leading-[0.95] mb-12">
+              Turn
               <br />
-              into <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-600">currency</span>?
+              <span className="font-serif italic">curiosity</span>
+              <br />
+              into
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-yellow-400">
+                currency
+              </span>
             </h2>
-            
-            <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-              Join creators already earning on their terms. Anonymous. Autonomous. Unstoppable.
+
+            <p className="text-xl text-gray-500 mb-16 leading-loose">
+              Anonymous creators are already earning.
+              <br />
+              Will you join them?
             </p>
 
             <Link 
               href="https://t.me/pata_monad_bot"
               target="_blank"
-              className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-yellow-500 to-amber-600 text-black rounded-full hover:shadow-2xl hover:shadow-yellow-500/50 transition-all font-bold text-lg"
+              className="inline-block group relative px-12 py-5 overflow-hidden"
             >
-              Open Telegram Bot
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/>
-              </svg>
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-amber-600 translate-x-full group-hover:translate-x-0 transition-transform duration-700"></div>
+              <span className="relative z-10 text-black font-medium tracking-wider text-lg">
+                Start Now
+              </span>
             </Link>
           </div>
         </div>
 
-        {/* Background decoration */}
-        <div className="absolute inset-0 bg-gradient-to-t from-yellow-500/5 via-transparent to-transparent pointer-events-none" />
+        {/* Gradient overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-amber-500/5 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-[200px] pointer-events-none" />
       </section>
 
-      {/* Footer - Minimal */}
-      <footer className="border-t border-gray-900 py-12 px-6">
+      {/* Footer - Ultra minimal */}
+      <footer className="border-t border-gray-900 py-12 px-8">
         <div className="container mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-gray-600">
             <div className="flex items-center gap-3">
-              <Image src="/logo.jpg" alt="Logo" width={40} height={40} />
-              <span className="text-gray-500 text-sm">© 2026 Patas4Land. Built on Monad.</span>
+              <Image src="/logo-v2.png" alt="Logo" width={32} height={32} className="opacity-40" />
+              <span>Patas4Land © 2026</span>
             </div>
             
-            <div className="flex items-center gap-6">
-              <Link href="https://twitter.com/patas4Land" target="_blank" className="text-gray-500 hover:text-white transition-colors">
+            <div className="flex items-center gap-8">
+              <Link href="https://twitter.com/patas4Land" target="_blank" className="hover:text-white transition-colors">
                 Twitter
               </Link>
-              <Link href="https://t.me/pata_monad_bot" target="_blank" className="text-gray-500 hover:text-white transition-colors">
+              <Link href="https://t.me/pata_monad_bot" target="_blank" className="hover:text-white transition-colors">
                 Telegram
               </Link>
-              <span className="text-gray-700">•</span>
-              <span className="text-xs text-gray-600 font-mono">
-                0xF383a61f1a68ee4A77a1b7F57D8f2d948B5f7777
+              <span className="text-gray-800">•</span>
+              <span className="font-mono text-xs text-gray-700">
+                Built on Monad
               </span>
             </div>
           </div>
