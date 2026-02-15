@@ -12,7 +12,7 @@ function SuccessContent() {
         <div className="container mx-auto px-8 py-6 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 opacity-80 hover:opacity-100 transition-opacity">
             <Image 
-              src="/logo-v2.png" 
+              src="/logo.png" 
               alt="Patas4Land" 
               width={48} 
               height={48}
@@ -68,7 +68,7 @@ function SuccessContent() {
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-gray-600">
             <div className="flex items-center gap-3">
-              <Image src="/logo-v2.png" alt="Logo" width={32} height={32} className="opacity-40" />
+              <Image src="/logo.png" alt="Logo" width={32} height={32} className="opacity-40" />
               <span>Patas4Land © 2026</span>
             </div>
             

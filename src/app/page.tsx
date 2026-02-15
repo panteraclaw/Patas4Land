@@ -9,7 +9,7 @@ export default function HomePage() {
         <div className="container mx-auto px-8 py-6 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
             <Image 
-              src="/logo-v2.png" 
+              src="/logo.png" 
               alt="Patas4Land" 
               width={48} 
               height={48}
@@ -39,13 +39,13 @@ export default function HomePage() {
         <div className="container mx-auto">
           <div className="max-w-5xl mx-auto text-center">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 border border-gray-800 rounded-full mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 border border-gray-800 rounded-full mb-8">
               <span className="text-yellow-500 text-sm">●</span>
               <span className="text-gray-400 text-sm">Premium Foot Content Marketplace</span>
             </div>
 
-            {/* Main headline */}
-            <h1 className="text-7xl md:text-9xl font-light tracking-tight leading-[0.9] mb-12">
+            {/* Main headline - Reduced size */}
+            <h1 className="text-5xl md:text-7xl font-light tracking-tight leading-[0.9] mb-8">
               Sell your
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-200">
@@ -56,10 +56,10 @@ export default function HomePage() {
             </h1>
 
             {/* Subheadline */}
-            <p className="text-xl md:text-2xl text-gray-400 font-light leading-relaxed max-w-3xl mx-auto mb-16">
-              The easiest way to monetize your feet content.
+            <p className="text-lg md:text-xl text-gray-400 font-light leading-relaxed max-w-3xl mx-auto mb-12">
+              Our Telegram bot handles everything: listings, payments, delivery.
               <br />
-              Set your price, get paid instantly in USDC.
+              You just upload content and get paid instantly in USDC.
             </p>
 
             {/* CTAs */}
@@ -84,13 +84,19 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* Impact statement */}
-            <div className="mt-20 pt-12 border-t border-gray-900">
-              <p className="text-sm text-gray-600 leading-loose">
-                <span className="text-green-500">10%</span> of every sale plants trees.
-                <br />
-                Support reforestation while earning.
-              </p>
+            {/* Token info + Reforestation */}
+            <div className="mt-16 pt-8 border-t border-gray-900 flex flex-col sm:flex-row items-center justify-center gap-8">
+              <div className="text-sm text-gray-600">
+                <span className="text-green-500">3%</span> of sales → reforestation
+              </div>
+              <div className="text-gray-800">•</div>
+              <div className="text-sm text-gray-600">
+                Token: <span className="text-yellow-500 font-mono">$PATAS</span> on Monad
+              </div>
+              <div className="text-gray-800">•</div>
+              <div className="text-xs font-mono text-gray-700">
+                0xF383a...7777
+              </div>
             </div>
           </div>
         </div>
@@ -100,31 +106,31 @@ export default function HomePage() {
       </section>
 
       {/* Value Props */}
-      <section className="py-32 px-8 border-t border-gray-900">
+      <section className="py-24 px-8 border-t border-gray-900">
         <div className="container mx-auto">
-          <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-16">
+          <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-12">
             {[
+              {
+                label: 'Telegram Bot',
+                value: 'No website needed. Upload, price, sell—all via Telegram bot.',
+              },
               {
                 label: 'Instant Payouts',
                 value: 'Get paid immediately in USDC. You keep 90% of every sale.',
               },
               {
-                label: 'Easy to Use',
-                value: 'Upload via Telegram bot. Set your price. Done.',
-              },
-              {
-                label: 'Global Reach',
-                value: 'Sell to buyers worldwide. Crypto payments, no borders.',
+                label: 'Global Market',
+                value: 'Sell worldwide. Crypto payments, no borders, no banks.',
               }
             ].map((item, i) => (
               <div key={i} className="group">
-                <div className="mb-4 text-xs tracking-[0.3em] uppercase text-gray-600">
+                <div className="mb-3 text-xs tracking-[0.3em] uppercase text-gray-600">
                   {String(i + 1).padStart(2, '0')}
                 </div>
-                <h3 className="text-3xl font-light mb-4 group-hover:text-amber-400 transition-colors">
+                <h3 className="text-2xl font-light mb-3 group-hover:text-amber-400 transition-colors">
                   {item.label}
                 </h3>
-                <p className="text-gray-500 leading-loose">
+                <p className="text-gray-500 leading-loose text-sm">
                   {item.value}
                 </p>
               </div>
@@ -134,15 +140,15 @@ export default function HomePage() {
       </section>
 
       {/* How It Works */}
-      <section className="py-32 px-8 bg-gradient-to-b from-black via-gray-950 to-black">
+      <section className="py-24 px-8 bg-gradient-to-b from-black via-gray-950 to-black">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto">
             {/* Section header */}
-            <div className="mb-24 text-center">
-              <p className="text-xs tracking-[0.3em] uppercase text-gray-600 mb-6">
+            <div className="mb-20 text-center">
+              <p className="text-xs tracking-[0.3em] uppercase text-gray-600 mb-4">
                 How it works
               </p>
-              <h2 className="text-5xl md:text-6xl font-light">
+              <h2 className="text-4xl md:text-5xl font-light">
                 Start earning in
                 <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-yellow-400">
@@ -152,7 +158,7 @@ export default function HomePage() {
             </div>
 
             {/* Steps */}
-            <div className="space-y-24">
+            <div className="space-y-16">
               {[
                 {
                   num: '01',
@@ -162,7 +168,7 @@ export default function HomePage() {
                 {
                   num: '02',
                   title: 'Set Your Price',
-                  desc: 'Choose your price in USDC. You keep 90%, platform takes 10%.'
+                  desc: 'Choose your price in USDC. Platform keeps 7%, 3% goes to trees. You keep 90%.'
                 },
                 {
                   num: '03',
@@ -172,18 +178,18 @@ export default function HomePage() {
               ].map((step, i) => (
                 <div 
                   key={i} 
-                  className="relative pl-32 border-l border-gray-900 hover:border-amber-500/30 transition-colors group"
+                  className="relative pl-24 border-l border-gray-900 hover:border-amber-500/30 transition-colors group"
                 >
-                  <div className="absolute left-0 top-0 -translate-x-1/2 w-20 h-20 rounded-full bg-black border border-gray-900 group-hover:border-amber-500/50 flex items-center justify-center transition-colors">
+                  <div className="absolute left-0 top-0 -translate-x-1/2 w-16 h-16 rounded-full bg-black border border-gray-900 group-hover:border-amber-500/50 flex items-center justify-center transition-colors">
                     <span className="text-xs tracking-wider text-gray-600 group-hover:text-amber-500">
                       {step.num}
                     </span>
                   </div>
                   <div>
-                    <h3 className="text-3xl font-light mb-4">
+                    <h3 className="text-2xl font-light mb-3">
                       {step.title}
                     </h3>
-                    <p className="text-gray-500 text-lg leading-loose">
+                    <p className="text-gray-500 leading-loose">
                       {step.desc}
                     </p>
                   </div>
@@ -195,17 +201,17 @@ export default function HomePage() {
       </section>
 
       {/* Stats */}
-      <section className="py-32 px-8 border-t border-gray-900">
+      <section className="py-24 px-8 border-t border-gray-900">
         <div className="container mx-auto">
-          <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12">
+          <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
               { value: '$0', label: 'Setup Cost' },
               { value: '90%', label: 'Your Earnings' },
-              { value: '10%', label: 'For Reforestation' },
-              { value: '< 60s', label: 'Time to List' }
+              { value: '7%', label: 'Platform Fee' },
+              { value: '3%', label: 'Reforestation' }
             ].map((stat, i) => (
               <div key={i} className="text-center">
-                <div className="text-5xl font-light mb-3 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-600">
+                <div className="text-4xl font-light mb-2 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-600">
                   {stat.value}
                 </div>
                 <div className="text-xs tracking-[0.2em] uppercase text-gray-600">
@@ -218,10 +224,10 @@ export default function HomePage() {
       </section>
 
       {/* Final CTA */}
-      <section className="relative py-40 px-8 overflow-hidden">
+      <section className="relative py-32 px-8 overflow-hidden">
         <div className="container mx-auto relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-6xl md:text-8xl font-light leading-[0.95] mb-12">
+            <h2 className="text-5xl md:text-6xl font-light leading-[0.95] mb-8">
               Ready to
               <br />
               <span className="font-serif italic">monetize</span>
@@ -233,7 +239,7 @@ export default function HomePage() {
               </span>
             </h2>
 
-            <p className="text-xl text-gray-500 mb-16 leading-loose">
+            <p className="text-lg text-gray-500 mb-12 leading-loose">
               Join sellers already earning on Patas4Land.
               <br />
               Get started in less than a minute.
@@ -263,7 +269,7 @@ export default function HomePage() {
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-gray-600">
             <div className="flex items-center gap-3">
-              <Image src="/logo-v2.png" alt="Logo" width={32} height={32} className="opacity-40" />
+              <Image src="/logo.png" alt="Logo" width={32} height={32} className="opacity-40" />
               <span>Patas4Land © 2026</span>
             </div>
             
