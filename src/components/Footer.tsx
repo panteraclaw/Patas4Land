@@ -44,7 +44,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 pt-6 border-t border-red-900/10 text-center text-xs text-gray-500">
-          <p>Built with 🐆 by Frutero Club • Moltiverse Hackathon 2026</p>
+          <p>Moltiverse Hackathon 2026 • Monad Blockchain</p>
         </div>
       </div>
     </footer>

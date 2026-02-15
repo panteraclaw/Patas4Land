@@ -2,36 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: #1a0a1f;
-  color: white;
-  background-image: 
-    radial-gradient(circle at 20% 50%, rgba(139, 0, 0, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(75, 0, 130, 0.05) 0%, transparent 50%),
-    linear-gradient(180deg, #0a0008 0%, #1a0a1f 50%, #120612 100%);
-  background-attachment: fixed;
-}
-
-/* Kinky noir texture overlay */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(255, 255, 255, 0.01) 2px,
-      rgba(255, 255, 255, 0.01) 4px
-    );
-  pointer-events: none;
-  z-index: 1;
-}
-
-.glow-red {
-  box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
+@layer base {
+  body {
+    @apply bg-[#1a0a1f] text-white;
+  }
 }
