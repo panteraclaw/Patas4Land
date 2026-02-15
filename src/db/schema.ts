@@ -11,6 +11,10 @@ export const users = pgTable("users", {
   role: varchar("role", { length: 20 }).notNull().default("buyer"), // "seller" | "buyer" | "both"
   balance: decimal("balance", { precision: 18, scale: 8 }).default("0"),
   isVerified: boolean("is_verified").default(false),
+  // Seller profile fields (FunWithFeet style)
+  age: integer("age"), // Seller age
+  country: varchar("country", { length: 2 }), // ISO country code (US, MX, etc)
+  bio: text("bio"), // Seller description/bio
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });

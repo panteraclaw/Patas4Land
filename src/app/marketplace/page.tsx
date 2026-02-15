@@ -1,46 +1,60 @@
+'use client';
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState, useEffect } from 'react';
 
-async function getListings() {
-  try {
-    const { db } = await import('@/db')
-    const { listings, users } = await import('@/db/schema')
-    const { eq, desc } = await import('drizzle-orm')
+type ListingItem = {
+  id: string;
+  imageUrl: string;
+  thumbnailUrl: string | null;
+  price: string;
+  tags: unknown;
+  status: string;
+  views: number | null;
+  purchases: number | null;
+  createdAt: Date | null;
+  sellerUsername: string | null;
+  sellerWallet: string | null;
+  sellerAge: number | null;
+  sellerCountry: string | null;
+  sellerBio: string | null;
+};
 
-    const results = await db
-      .select({
-        id: listings.id,
-        imageUrl: listings.imageUrl,
-        thumbnailUrl: listings.thumbnailUrl,
-        price: listings.price,
-        tags: listings.tags,
-        status: listings.status,
-        views: listings.views,
-        purchases: listings.purchases,
-        createdAt: listings.createdAt,
-        sellerUsername: users.telegramUsername,
-        sellerWallet: users.monadWallet,
-      })
-      .from(listings)
-      .leftJoin(users, eq(listings.sellerId, users.id))
-      .where(eq(listings.status, 'active'))
-      .orderBy(desc(listings.createdAt))
+export default function MarketplacePage() {
+  const [items, setItems] = useState<ListingItem[]>([]);
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [loading, setLoading] = useState(true);
 
-    return results
-  } catch (error) {
-    console.error('Error fetching listings:', error)
-    return []
-  }
-}
+  // Fetch listings on mount
+  useEffect(() => {
+    async function fetchListings() {
+      try {
+        const res = await fetch('/api/listings/create');
+        const data = await res.json();
+        if (data.success) {
+          setItems(data.listings);
+        }
+      } catch (error) {
+        console.error('Error fetching listings:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchListings();
+  }, []);
 
-type ListingItem = Awaited<ReturnType<typeof getListings>>[number];
-
-export default async function MarketplacePage() {
-  const items = await getListings()
+  // Filter by category
+  const filteredItems = activeCategory === 'all' 
+    ? items 
+    : items.filter(item => {
+        const tags = Array.isArray(item.tags) ? item.tags as string[] : [];
+        return tags.includes(activeCategory);
+      });
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Navigation - Mismo estilo que home */}
+      {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-gray-900">
         <div className="container mx-auto px-8 py-6 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 opacity-80 hover:opacity-100 transition-opacity">
@@ -62,9 +76,9 @@ export default async function MarketplacePage() {
             <Link 
               href="https://t.me/pata_monad_bot" 
               target="_blank"
-              className="px-6 py-2 border border-gray-800 hover:border-gray-600 rounded-full text-sm tracking-wider uppercase transition-all"
+              className="px-6 py-2 bg-yellow-500 text-black rounded-full text-sm font-semibold hover:bg-yellow-400 transition-all"
             >
-              List Content
+              Start Selling
             </Link>
           </div>
         </div>
@@ -73,51 +87,91 @@ export default async function MarketplacePage() {
       <div className="pt-32 pb-24 px-8">
         <div className="container mx-auto">
           {/* Page Header */}
-          <div className="max-w-4xl mx-auto mb-24 text-center">
+          <div className="max-w-4xl mx-auto mb-16 text-center">
             <p className="text-xs tracking-[0.3em] uppercase text-gray-600 mb-6">
-              {items.length} Premium Listings
+              {filteredItems.length} Sellers Online
             </p>
             
             <h1 className="text-6xl md:text-8xl font-light mb-8">
-              The
+              Browse
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-yellow-400">
-                Vault
+                Content
               </span>
             </h1>
 
             <p className="text-xl text-gray-500 leading-loose">
-              Exclusive content. Verified creators. Instant access.
+              Premium foot content from verified sellers worldwide
             </p>
           </div>
 
-          {/* Filters */}
-          <div className="flex items-center justify-center gap-4 mb-16">
-            <button className="px-8 py-3 bg-white text-black rounded-full text-sm tracking-wider uppercase font-medium hover:bg-gray-100 transition-colors">
+          {/* Categories - Functional */}
+          <div className="flex items-center justify-center gap-3 mb-16 flex-wrap">
+            <button 
+              onClick={() => setActiveCategory('all')}
+              className={`px-8 py-3 rounded-full text-sm tracking-wider uppercase font-medium transition-colors ${
+                activeCategory === 'all'
+                  ? 'bg-white text-black'
+                  : 'bg-transparent border border-gray-800 hover:border-gray-600'
+              }`}
+            >
               All
             </button>
-            <button className="px-8 py-3 bg-transparent border border-gray-800 hover:border-gray-600 rounded-full text-sm tracking-wider uppercase font-medium transition-colors">
-              Top Rated
+            <button 
+              onClick={() => setActiveCategory('verified')}
+              className={`px-8 py-3 rounded-full text-sm tracking-wider uppercase font-medium transition-colors ${
+                activeCategory === 'verified'
+                  ? 'bg-white text-black'
+                  : 'bg-transparent border border-gray-800 hover:border-gray-600'
+              }`}
+            >
+              Verified
             </button>
-            <button className="px-8 py-3 bg-transparent border border-gray-800 hover:border-gray-600 rounded-full text-sm tracking-wider uppercase font-medium transition-colors">
+            <button 
+              onClick={() => setActiveCategory('new')}
+              className={`px-8 py-3 rounded-full text-sm tracking-wider uppercase font-medium transition-colors ${
+                activeCategory === 'new'
+                  ? 'bg-white text-black'
+                  : 'bg-transparent border border-gray-800 hover:border-gray-600'
+              }`}
+            >
               New
+            </button>
+            <button 
+              onClick={() => setActiveCategory('hd')}
+              className={`px-8 py-3 rounded-full text-sm tracking-wider uppercase font-medium transition-colors ${
+                activeCategory === 'hd'
+                  ? 'bg-white text-black'
+                  : 'bg-transparent border border-gray-800 hover:border-gray-600'
+              }`}
+            >
+              HD
             </button>
           </div>
 
-          {/* Grid */}
-          {items.length === 0 ? (
+          {/* Loading State */}
+          {loading && (
+            <div className="text-center py-32">
+              <div className="inline-flex items-center gap-3">
+                <div className="w-2 h-2 bg-yellow-500 rounded-full animate-bounce"></div>
+                <div className="w-2 h-2 bg-yellow-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                <div className="w-2 h-2 bg-yellow-500 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+              </div>
+            </div>
+          )}
+
+          {/* Empty State */}
+          {!loading && filteredItems.length === 0 && (
             <div className="max-w-2xl mx-auto text-center py-32">
               <div className="mb-12">
                 <div className="inline-flex items-center justify-center w-24 h-24 rounded-full border border-gray-900 mb-8">
-                  <span className="text-4xl opacity-50">🔒</span>
+                  <span className="text-4xl opacity-50">👀</span>
                 </div>
                 <h3 className="text-4xl font-light mb-6">
-                  The vault awaits
+                  {activeCategory === 'all' ? 'No listings yet' : `No ${activeCategory} content found`}
                 </h3>
                 <p className="text-gray-500 text-lg leading-loose mb-12">
-                  Be the first creator to list premium content.
-                  <br />
-                  Set your price. Keep 90%. Plant trees with every sale.
+                  Be the first seller in this category
                 </p>
               </div>
               
@@ -133,104 +187,123 @@ export default async function MarketplacePage() {
                 </span>
               </Link>
             </div>
-          ) : (
+          )}
+
+          {/* Grid - FunWithFeet Style */}
+          {!loading && filteredItems.length > 0 && (
             <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {items.map((item: ListingItem) => (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredItems.map((item: ListingItem) => (
                   <div 
                     key={item.id} 
-                    className="group relative"
+                    className="group relative bg-gray-950 border border-gray-900 rounded-2xl overflow-hidden hover:border-yellow-500/50 transition-all duration-300"
                   >
-                    {/* Card */}
-                    <div className="relative bg-gray-950 border border-gray-900 group-hover:border-amber-500/50 rounded-2xl overflow-hidden transition-all duration-500">
-                      {/* Image Container */}
-                      <div className="relative aspect-[3/4] bg-black overflow-hidden">
-                        {item.thumbnailUrl ? (
-                          <img
-                            src={item.thumbnailUrl}
-                            alt="Content preview"
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="text-center space-y-4">
-                              <div className="text-5xl opacity-20">🔒</div>
-                              <div className="text-sm text-gray-700 tracking-wider uppercase">
-                                Premium
-                              </div>
+                    {/* Preview Image */}
+                    <div className="relative aspect-[4/5] bg-black overflow-hidden">
+                      {item.thumbnailUrl ? (
+                        <img
+                          src={item.thumbnailUrl}
+                          alt="Preview"
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="text-center space-y-4">
+                            <div className="text-5xl opacity-20">🔒</div>
+                            <div className="text-sm text-gray-700 tracking-wider uppercase">
+                              Premium
                             </div>
                           </div>
-                        )}
-                        
-                        {/* Blur overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent backdrop-blur-[1px]" />
-                        
-                        {/* Lock badge */}
-                        <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-gray-800">
-                          <span className="text-xs tracking-wider text-gray-400">HD</span>
                         </div>
-
-                        {/* Stats overlay */}
-                        <div className="absolute bottom-0 left-0 right-0 p-4 flex items-center justify-between text-xs text-gray-400">
-                          <span className="flex items-center gap-1">
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                            </svg>
-                            {item.views || 0}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                            </svg>
-                            {item.purchases || 0}
-                          </span>
-                        </div>
+                      )}
+                      
+                      {/* Blur overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+                      
+                      {/* Stats overlay */}
+                      <div className="absolute bottom-0 left-0 right-0 p-4 flex items-center justify-between text-xs text-gray-400">
+                        <span className="flex items-center gap-1">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                          </svg>
+                          {item.views || 0}
+                        </span>
+                        <span className="text-yellow-500 font-medium">
+                          ${item.price}
+                        </span>
                       </div>
+                    </div>
 
-                      {/* Info */}
-                      <div className="p-6 space-y-4">
-                        {/* Price */}
-                        <div className="flex items-baseline justify-between">
-                          <div>
-                            <div className="text-3xl font-light text-amber-400">
-                              ${item.price}
-                            </div>
-                            <div className="text-xs text-gray-600 mt-1 tracking-wider uppercase">
-                              USDC
-                            </div>
+                    {/* Seller Info - FunWithFeet Style */}
+                    <div className="p-6 space-y-4">
+                      {/* Seller Header */}
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="text-lg font-medium">
+                              {item.sellerUsername || 'Anonymous'}
+                            </h3>
+                            {/* Country flag */}
+                            {item.sellerCountry && (
+                              <span className="text-xl">
+                                {getFlagEmoji(item.sellerCountry)}
+                              </span>
+                            )}
                           </div>
                           
-                          {/* Tags */}
-                          {item.tags && Array.isArray(item.tags) && item.tags.length > 0 && (
-                            <div className="flex flex-wrap gap-1 justify-end">
-                              {(item.tags as string[]).slice(0, 2).map((tag: string, i: number) => (
-                                <span 
-                                  key={i} 
-                                  className="text-xs px-2 py-1 bg-gray-900 border border-gray-800 rounded text-gray-500"
-                                >
-                                  {tag}
-                                </span>
-                              ))}
+                          {/* Age */}
+                          {item.sellerAge && (
+                            <div className="text-sm text-gray-500">
+                              {item.sellerAge} years old
                             </div>
                           )}
                         </div>
-
-                        {/* Seller */}
-                        <div className="text-xs text-gray-600 tracking-wider">
-                          by {item.sellerUsername || 'Anonymous'}
-                        </div>
-
-                        {/* CTA */}
-                        <a
-                          href={`https://t.me/pata_monad_bot?start=buy_${item.id}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="block w-full text-center py-3 bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-yellow-500 hover:to-amber-600 text-black rounded-lg font-medium tracking-wider uppercase text-sm transition-all"
-                        >
-                          Unlock
-                        </a>
+                        
+                        {(() => {
+                          const tags = item.tags;
+                          if (tags && Array.isArray(tags) && tags.length > 0) {
+                            return (
+                              <div className="flex flex-wrap gap-1 justify-end">
+                                {(tags as string[]).slice(0, 2).map((tag: string, i: number) => (
+                                  <span 
+                                    key={i} 
+                                    className="text-xs px-2 py-1 bg-gray-900 border border-gray-800 rounded text-gray-500"
+                                  >
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
+                            );
+                          }
+                          return null;
+                        })()}
                       </div>
+
+                      {/* Bio/Description */}
+                      {item.sellerBio && (
+                        <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">
+                          {item.sellerBio}
+                        </p>
+                      )}
+
+                      {/* Gallery indicator */}
+                      <div className="flex items-center gap-2 text-xs text-gray-600">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <span>Gallery available</span>
+                      </div>
+
+                      {/* CTA */}
+                      <a
+                        href={`https://t.me/pata_monad_bot?start=buy_${item.id}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block w-full text-center py-3 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 hover:to-amber-500 text-black rounded-xl font-semibold tracking-wider uppercase text-sm transition-all"
+                      >
+                        View Profile
+                      </a>
                     </div>
                   </div>
                 ))}
@@ -244,34 +317,29 @@ export default async function MarketplacePage() {
               <div className="relative z-10">
                 <div className="text-5xl mb-6">🌳</div>
                 <h3 className="text-4xl font-light mb-4">
-                  Monetize your content.
-                  <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-500">
-                    Plant trees.
-                  </span>
+                  Start selling today
                 </h3>
                 <p className="text-gray-500 text-lg leading-loose mb-8">
-                  Upload via Telegram. Set your price. Keep 90%.
+                  Upload your content via Telegram. Set your price. Get paid instantly.
                   <br />
-                  <span className="text-green-500 font-medium">10% goes to reforestation.</span>
+                  <span className="text-green-500 font-medium">10% supports reforestation.</span>
                 </p>
                 <Link 
                   href="https://t.me/pata_monad_bot"
                   target="_blank"
                   className="inline-block px-10 py-4 border border-gray-800 hover:border-gray-600 rounded-full font-medium tracking-wider uppercase text-sm transition-all"
                 >
-                  Start Selling
+                  Open Telegram Bot
                 </Link>
               </div>
               
-              {/* Background glow */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-green-500/5 rounded-full blur-3xl pointer-events-none" />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Footer - Mismo que home */}
+      {/* Footer */}
       <footer className="border-t border-gray-900 py-12 px-8">
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-gray-600">
@@ -287,14 +355,19 @@ export default async function MarketplacePage() {
               <Link href="https://t.me/pata_monad_bot" target="_blank" className="hover:text-white transition-colors">
                 Telegram
               </Link>
-              <span className="text-gray-800">•</span>
-              <span className="font-mono text-xs text-gray-700">
-                Built on Monad
-              </span>
             </div>
           </div>
         </div>
       </footer>
     </div>
   )
+}
+
+// Helper: Convert country code to flag emoji
+function getFlagEmoji(countryCode: string): string {
+  const codePoints = countryCode
+    .toUpperCase()
+    .split('')
+    .map(char => 127397 + char.charCodeAt(0));
+  return String.fromCodePoint(...codePoints);
 }

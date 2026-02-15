@@ -57,6 +57,9 @@ export async function GET(request: NextRequest) {
         createdAt: listings.createdAt,
         sellerUsername: users.telegramUsername,
         sellerWallet: users.monadWallet,
+        sellerAge: users.age,
+        sellerCountry: users.country,
+        sellerBio: users.bio,
       })
       .from(listings)
       .leftJoin(users, eq(listings.sellerId, users.id))
