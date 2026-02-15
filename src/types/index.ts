@@ -1,26 +1,45 @@
-// Re-export types from Drizzle schema
-export type { User, NewUser, Category, NewCategory, Artwork, NewArtwork, BlogPost, NewBlogPost } from '../db/schema';
+/**
+ * Type definitions for Patas4Land
+ * Exports Drizzle schema types and frontend form interfaces
+ */
 
-// Form data types for frontend
-export interface ArtworkFormData {
-  title: string;
-  description: string;
-  category: string;
-  year?: number;
-  medium?: string;
-  technique?: string;
-  dimensions?: string;
-  price?: number;
-  available: boolean;
-  featured: boolean;
+// Re-export schema table types (inferred from Drizzle)
+export type { 
+  users as User,
+  listings as Listing, 
+  transactions as Transaction,
+  reforestation as Reforestation,
+  botSessions as BotSession
+} from '../db/schema';
+
+// Inferred insert types (for creating new records)
+import type { InferInsertModel } from 'drizzle-orm';
+import type { users, listings, transactions, botSessions } from '../db/schema';
+
+export type NewUser = InferInsertModel<typeof users>;
+export type NewListing = InferInsertModel<typeof listings>;
+export type NewTransaction = InferInsertModel<typeof transactions>;
+export type NewBotSession = InferInsertModel<typeof botSessions>;
+
+// Frontend form interfaces
+export interface ListingFormData {
+  imageUrl: string;
+  price: number;
+  title?: string;
+  description?: string;
+  tags?: string[];
 }
 
-export interface BlogFormData {
-  title: string;
-  content: string;
-  excerpt?: string;
-  coverImageUrl?: string;
-  published: boolean;
+export interface UserProfileData {
+  telegramUsername?: string;
+  monadWallet: string;
+  role: 'seller' | 'buyer' | 'both';
+}
+
+export interface TransactionFormData {
+  listingId: string;
+  amount: number;
+  currency: 'MON' | 'USDC';
 }
 
 export interface ContactForm {

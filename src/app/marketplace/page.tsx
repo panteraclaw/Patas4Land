@@ -1,7 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { db, listings, users } from '@/db/schema'
-import { eq } from 'drizzle-orm'
 
 async function getListings() {
   try {
@@ -34,6 +32,8 @@ async function getListings() {
     return []
   }
 }
+
+type ListingItem = Awaited<ReturnType<typeof getListings>>[number];
 
 export default async function MarketplacePage() {
   const items = await getListings()
@@ -72,7 +72,7 @@ export default async function MarketplacePage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {items.map((item) => (
+            {items.map((item: ListingItem) => (
               <div key={item.id} className="bg-slate-800 rounded-lg overflow-hidden hover:ring-2 hover:ring-yellow-400 transition-all">
                 {/* Preview Image (blurred) */}
                 <div className="aspect-square bg-slate-700 relative overflow-hidden">
