@@ -7,6 +7,7 @@ export const users = pgTable("users", {
   telegramUsername: varchar("telegram_username", { length: 255 }).unique(),
   telegramId: varchar("telegram_id", { length: 255 }).unique(),
   monadWallet: varchar("monad_wallet", { length: 42 }).notNull().unique(),
+  alias: varchar("alias", { length: 255 }), // Display name
   role: varchar("role", { length: 20 }).notNull().default("buyer"), // "seller" | "buyer" | "both"
   balance: decimal("balance", { precision: 18, scale: 8 }).default("0"),
   isVerified: boolean("is_verified").default(false),
@@ -18,14 +19,16 @@ export const users = pgTable("users", {
 export const listings = pgTable("listings", {
   id: varchar("id", { length: 255 }).primaryKey(), // UUID from bot
   sellerId: integer("seller_id").references(() => users.id).notNull(),
+  sellerAlias: varchar("seller_alias", { length: 255 }), // Display name instead of username
   imageUrl: text("image_url").notNull(),
   thumbnailUrl: text("thumbnail_url"), // Optional optimized version
   price: decimal("price", { precision: 10, scale: 4 }).notNull(), // MON price
   priceUSD: decimal("price_usd", { precision: 10, scale: 2 }), // USDC equivalent
   title: varchar("title", { length: 255 }),
   description: text("description"),
+  category: varchar("category", { length: 255 }), // Category from predefined list
   tags: jsonb("tags").default([]), // ["feet", "verified", etc]
-  status: varchar("status", { length: 20 }).notNull().default("active"), // "active" | "sold" | "removed"
+  status: varchar("status", { length: 20 }).notNull().default("active"), // "active" | "removed" (no "sold" - can be bought multiple times)
   views: integer("views").default(0),
   purchases: integer("purchases").default(0),
   createdAt: timestamp("created_at").defaultNow().notNull(),
