@@ -55,7 +55,7 @@ export async function GET(request: NextRequest) {
         views: listings.views,
         purchases: listings.purchases,
         createdAt: listings.createdAt,
-        sellerUsername: users.telegramUsername,
+        sellerUsername: users.alias,
         sellerWallet: users.monadWallet,
         sellerAge: users.age,
         sellerCountry: users.country,

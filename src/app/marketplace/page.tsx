@@ -242,7 +242,7 @@ export default function MarketplacePage() {
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-1">
                             <h3 className="text-lg font-medium">
-                              {item.sellerUsername || 'Anonymous'}
+                              {item.sellerUsername && !item.sellerUsername.startsWith('@') ? item.sellerUsername : 'Anonymous'}
                             </h3>
                             {/* Country flag */}
                             {item.sellerCountry && (
