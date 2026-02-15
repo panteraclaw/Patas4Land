@@ -1,125 +1,219 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
+import AgeGate from '../components/AgeGate'
+import { motion } from 'framer-motion'
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6 }
+}
+
+const staggerContainer = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+}
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen relative">
-      {/* Hero Section */}
-      <div className="container mx-auto px-4 py-20">
-        <div className="flex flex-col items-center text-center space-y-8 relative z-10">
-          {/* Logo with glow */}
-          <div className="relative">
-            <div className="absolute inset-0 bg-red-600/20 blur-3xl rounded-full"></div>
-            <Image 
-              src="/logo.jpg" 
-              alt="Patas4Land" 
-              width={280} 
-              height={280}
-              className="rounded-2xl shadow-2xl relative z-10 border-2 border-red-900/30"
-            />
+    <AgeGate>
+      <div className="min-h-screen relative overflow-hidden">
+        {/* Subtle animated background */}
+        <div className="fixed inset-0 bg-[#0a0008] -z-10">
+          <div className="absolute inset-0 bg-gradient-to-br from-red-950/10 via-transparent to-purple-950/10"></div>
+          <div className="absolute inset-0 opacity-30">
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-red-900/20 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-900/20 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
           </div>
-          
-          {/* Headline */}
-          <h1 className="text-6xl md:text-7xl font-bold text-white tracking-tight">
-            Patas<span className="text-red-500">4</span>Land
-          </h1>
-          
-          <p className="text-2xl md:text-3xl text-gray-300 max-w-3xl font-light">
-            <span className="text-red-400 font-semibold">Fetish for Forest</span>
-            <br />
-            Where desire meets conservation
-          </p>
+        </div>
 
-          <p className="text-sm text-gray-500 max-w-xl">
-            Agent-powered marketplace on <span className="text-purple-400 font-semibold">Monad</span>. 
-            Pay in <span className="text-green-400 font-semibold">USDC</span>. 
-            <span className="text-emerald-400"> 10% plants trees</span>.
-          </p>
-
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 mt-16 w-full max-w-2xl">
-            <div className="text-center p-6 bg-black/40 rounded-lg border border-red-900/20 backdrop-blur">
-              <div className="text-4xl font-bold text-emerald-400">10%</div>
-              <div className="text-sm text-gray-400 mt-2">To Reforestation</div>
-            </div>
-            <div className="text-center p-6 bg-black/40 rounded-lg border border-red-900/20 backdrop-blur">
-              <div className="text-4xl font-bold">🤖</div>
-              <div className="text-sm text-gray-400 mt-2">Agent-Powered</div>
-            </div>
-            <div className="text-center p-6 bg-black/40 rounded-lg border border-red-900/20 backdrop-blur">
-              <div className="text-4xl font-bold text-purple-400">⚡</div>
-              <div className="text-sm text-gray-400 mt-2">Monad Chain</div>
-            </div>
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="flex gap-4 mt-16">
-            <Link 
-              href="/marketplace"
-              className="px-10 py-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-lg hover:from-red-500 hover:to-red-600 transition-all shadow-lg hover:shadow-red-500/50 glow-red"
+        {/* Hero Section */}
+        <motion.div 
+          className="container mx-auto px-4 pt-32 pb-20"
+          initial="initial"
+          animate="animate"
+          variants={staggerContainer}
+        >
+          <div className="max-w-6xl mx-auto">
+            {/* Logo with elegant entrance */}
+            <motion.div 
+              variants={fadeInUp}
+              className="flex justify-center mb-12"
             >
-              Explore Marketplace
-            </Link>
-            <Link 
-              href="/login"
-              className="px-10 py-4 bg-black/60 border-2 border-red-900/40 text-white font-semibold rounded-lg hover:bg-black/80 hover:border-red-700/60 transition-all backdrop-blur"
+              <div className="relative group">
+                <div className="absolute inset-0 bg-red-600/20 blur-2xl rounded-full group-hover:bg-red-600/30 transition-all duration-700"></div>
+                <Image 
+                  src="/logo.jpg" 
+                  alt="Patas4Land" 
+                  width={200} 
+                  height={200}
+                  className="rounded-2xl relative z-10 border border-red-900/30 shadow-2xl"
+                />
+              </div>
+            </motion.div>
+
+            {/* Main Headline */}
+            <motion.div variants={fadeInUp} className="text-center space-y-6 mb-16">
+              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white tracking-tight">
+                Patas<span className="text-red-500">4</span>Land
+              </h1>
+              
+              <p className="text-3xl md:text-4xl text-gray-300 font-light tracking-wide">
+                <span className="text-red-400 font-medium">Fetish for Forest</span>
+              </p>
+
+              <p className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                Where pleasure meets purpose. Premium content, verified creators,
+                <span className="text-emerald-400 font-semibold"> 10% reforestation</span>.
+              </p>
+            </motion.div>
+
+            {/* Tech Stack Pills */}
+            <motion.div 
+              variants={fadeInUp}
+              className="flex flex-wrap justify-center gap-4 mb-16"
             >
-              Connect Wallet
+              <div className="px-6 py-3 bg-purple-950/40 border border-purple-700/30 rounded-full backdrop-blur-sm">
+                <span className="text-purple-300 font-medium">⚡ Monad Chain</span>
+              </div>
+              <div className="px-6 py-3 bg-green-950/40 border border-green-700/30 rounded-full backdrop-blur-sm">
+                <span className="text-green-300 font-medium">💵 USDC Payments</span>
+              </div>
+              <div className="px-6 py-3 bg-emerald-950/40 border border-emerald-700/30 rounded-full backdrop-blur-sm">
+                <span className="text-emerald-300 font-medium">🌲 10% Trees</span>
+              </div>
+            </motion.div>
+
+            {/* CTAs */}
+            <motion.div 
+              variants={fadeInUp}
+              className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+            >
+              <Link href="/marketplace">
+                <motion.div
+                  whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(220, 38, 38, 0.4)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-12 py-5 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold text-lg rounded-xl shadow-xl cursor-pointer"
+                >
+                  Explore Marketplace
+                </motion.div>
+              </Link>
+              
+              <Link href="/login">
+                <motion.div
+                  whileHover={{ scale: 1.05, borderColor: "rgba(220, 38, 38, 0.6)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-12 py-5 bg-black/40 border-2 border-red-900/40 text-white font-semibold text-lg rounded-xl backdrop-blur-sm cursor-pointer"
+                >
+                  Connect Wallet
+                </motion.div>
+              </Link>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Features Grid */}
+        <motion.div 
+          className="container mx-auto px-4 py-20"
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+        >
+          <div className="max-w-6xl mx-auto">
+            <motion.h2 
+              variants={fadeInUp}
+              className="text-4xl md:text-5xl font-bold text-center text-white mb-16"
+            >
+              How It Works
+            </motion.h2>
+            
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: "📸",
+                  title: "Send via Telegram",
+                  description: "Creators send photos to our agent. No complex dashboards, just pure simplicity."
+                },
+                {
+                  icon: "🤖",
+                  title: "Agent Handles Everything",
+                  description: "Auto-listing, pricing, sales, and USDC payments on Monad. Zero manual work."
+                },
+                {
+                  icon: "🌲",
+                  title: "Impact That Matters",
+                  description: "Every transaction automatically plants trees. Guilt-free indulgence with real impact."
+                }
+              ].map((feature, i) => (
+                <motion.div
+                  key={i}
+                  variants={fadeInUp}
+                  whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(220, 38, 38, 0.2)" }}
+                  className="p-8 bg-gradient-to-br from-black/60 to-red-950/20 rounded-2xl border border-red-900/20 backdrop-blur-sm transition-all duration-300"
+                >
+                  <div className="text-6xl mb-6">{feature.icon}</div>
+                  <h3 className="text-2xl font-bold text-white mb-4">{feature.title}</h3>
+                  <p className="text-gray-400 leading-relaxed">{feature.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Trust Badges */}
+        <motion.div 
+          className="container mx-auto px-4 py-16"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <div className="max-w-3xl mx-auto p-10 bg-gradient-to-br from-purple-950/30 to-black/60 rounded-3xl border border-purple-700/20 backdrop-blur-md text-center">
+            <p className="text-purple-300 text-sm mb-3 tracking-wider">POWERED BY</p>
+            <h3 className="text-4xl font-bold text-white mb-4">
+              ⚡ Monad Blockchain
+            </h3>
+            <p className="text-gray-400 mb-6">
+              High-performance EVM. Instant settlements. Built for autonomous agents.
+            </p>
+            <div className="flex justify-center gap-8 text-sm text-gray-500">
+              <div>🔒 Secure</div>
+              <div>⚡ Fast</div>
+              <div>🌐 Decentralized</div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Final CTA */}
+        <motion.div 
+          className="container mx-auto px-4 py-20"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <div className="max-w-2xl mx-auto text-center">
+            <h3 className="text-3xl font-bold text-white mb-4">
+              Ready to explore?
+            </h3>
+            <p className="text-gray-400 mb-8">
+              Join the marketplace where every transaction makes a difference.
+            </p>
+            <Link href="/marketplace">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="inline-block px-10 py-4 bg-red-600 text-white font-semibold rounded-xl shadow-lg cursor-pointer"
+              >
+                Enter Marketplace →
+              </motion.div>
             </Link>
           </div>
-
-          {/* Tagline */}
-          <p className="text-sm text-gray-500 mt-16 italic max-w-md">
-            "Every purchase plants a tree. Every tree fights climate change. Every transaction on Monad."
-          </p>
-        </div>
+        </motion.div>
       </div>
-
-      {/* How It Works - Dark elegant */}
-      <div className="container mx-auto px-4 py-20 border-t border-red-900/10">
-        <h2 className="text-4xl md:text-5xl font-bold text-center text-white mb-16">
-          How It Works
-        </h2>
-        
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          <div className="text-center space-y-4 p-8 bg-black/30 rounded-xl border border-red-900/20 backdrop-blur">
-            <div className="text-6xl">📸</div>
-            <h3 className="text-xl font-bold text-white">Send via Telegram</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Sellers send photos to our OpenClaw agent. No website, no hassle. Just pure convenience.
-            </p>
-          </div>
-          
-          <div className="text-center space-y-4 p-8 bg-black/30 rounded-xl border border-red-900/20 backdrop-blur">
-            <div className="text-6xl">🤖</div>
-            <h3 className="text-xl font-bold text-white">Agent Handles Everything</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Bot auto-lists, prices, manages sales, and handles USDC payments on Monad. Zero effort.
-            </p>
-          </div>
-          
-          <div className="text-center space-y-4 p-8 bg-black/30 rounded-xl border border-red-900/20 backdrop-blur">
-            <div className="text-6xl">🌲</div>
-            <h3 className="text-xl font-bold text-white">10% Plants Trees</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Every sale automatically contributes to verified reforestation projects. Guilt-free pleasure.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Monad Badge */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="max-w-2xl mx-auto p-8 bg-gradient-to-br from-purple-900/20 to-black/40 rounded-2xl border border-purple-700/30 backdrop-blur text-center">
-          <p className="text-purple-300 text-sm mb-2">POWERED BY</p>
-          <h3 className="text-3xl font-bold text-white mb-3">
-            ⚡ Monad Blockchain
-          </h3>
-          <p className="text-gray-400 text-sm">
-            High-performance EVM. USDC payments. Instant settlements. Built for agents.
-          </p>
-        </div>
-      </div>
-    </div>
+    </AgeGate>
   )
 }
