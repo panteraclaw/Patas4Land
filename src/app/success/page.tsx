@@ -1,115 +1,100 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { CheckCircle, ExternalLink, Wallet } from 'lucide-react';
+import Image from 'next/image';
 import { Suspense } from 'react';
 
 function SuccessContent() {
-    const searchParams = useSearchParams();
-    const paymentType = searchParams.get('type');
-    const orderId = searchParams.get('orderId');
-    const txHash = searchParams.get('txHash');
-    const chainId = searchParams.get('chainId');
+  return (
+    <div className="min-h-screen bg-black text-white flex flex-col">
+      {/* Nav */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-gray-900">
+        <div className="container mx-auto px-8 py-6 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-3 opacity-80 hover:opacity-100 transition-opacity">
+            <Image 
+              src="/logo-v2.png" 
+              alt="Patas4Land" 
+              width={48} 
+              height={48}
+            />
+          </Link>
+        </div>
+      </nav>
 
-    const isCrypto = paymentType === 'crypto';
-
-    // Get block explorer URL
-    const getExplorerUrl = (hash: string, chain: string | null) => {
-        const explorers: Record<string, string> = {
-            '1': 'https://etherscan.io',
-            '8453': 'https://basescan.org',
-            '137': 'https://polygonscan.com',
-            '42161': 'https://arbiscan.io',
-            '84532': 'https://sepolia.basescan.org',
-            '11155111': 'https://sepolia.etherscan.io',
-        };
-        const explorer = explorers[chain || '8453'] || 'https://basescan.org';
-        return `${explorer}/tx/${hash}`;
-    };
-
-    return (
-        <main className="min-h-screen bg-[#050505] flex items-center justify-center text-[#e5e5e5] pt-24">
-            <div className="text-center p-8 max-w-md">
-                <div className="flex justify-center mb-6">
-                    <CheckCircle size={64} className="text-green-500" />
-                </div>
-
-                <h1 className="text-3xl font-light uppercase tracking-widest mb-4">
-                    {isCrypto ? 'Payment Confirmed' : 'Payment Successful'}
-                </h1>
-
-                {isCrypto ? (
-                    <div className="space-y-6">
-                        <p className="text-[#8b7d7b] font-light">
-                            Your crypto payment has been verified on-chain. Martina will contact you soon to arrange shipping for your new artwork.
-                        </p>
-
-                        {txHash && (
-                            <div className="p-4 border border-[#1a1a1a] bg-[#0a0a0a] text-left">
-                                <div className="text-[9px] uppercase tracking-widest text-[#404040] mb-2">
-                                    Transaction Hash
-                                </div>
-                                <a
-                                    href={getExplorerUrl(txHash, chainId)}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-2 text-[#8a1c1c] hover:underline text-sm break-all"
-                                >
-                                    <span>{txHash.slice(0, 10)}...{txHash.slice(-8)}</span>
-                                    <ExternalLink size={12} />
-                                </a>
-                            </div>
-                        )}
-
-                        {orderId && (
-                            <div className="p-4 border border-[#1a1a1a] bg-[#0a0a0a] text-left">
-                                <div className="text-[9px] uppercase tracking-widest text-[#404040] mb-2">
-                                    Order Reference
-                                </div>
-                                <span className="text-sm text-[#e5e5e5] font-mono">
-                                    {orderId.slice(0, 8)}...
-                                </span>
-                            </div>
-                        )}
-
-                        <div className="p-4 border border-[#8a1c1c]/30 bg-[#8a1c1c]/5">
-                            <div className="flex items-center gap-2 text-[#8a1c1c] mb-2">
-                                <Wallet size={16} />
-                                <span className="text-xs uppercase tracking-wider">NFT Certificate</span>
-                            </div>
-                            <p className="text-xs text-[#8b7d7b]">
-                                Your certificate of authenticity NFT will be minted and sent to your wallet within 24-48 hours.
-                            </p>
-                        </div>
-                    </div>
-                ) : (
-                    <p className="text-[#8b7d7b] mb-8 font-light">
-                        Your acquisition has been confirmed. We will reach out to you shortly via email to coordinate delivery or appointment details.
-                    </p>
-                )}
-
-                <div className="mt-8 flex flex-col gap-3">
-                    <Link href="/portfolio" className="btn-ritual">
-                        Continue Exploring
-                    </Link>
-                    <Link href="/" className="text-xs text-[#606060] hover:text-[#e5e5e5] transition-colors">
-                        Return Home
-                    </Link>
-                </div>
+      {/* Content */}
+      <main className="flex-1 flex items-center justify-center px-8 pt-32 pb-24">
+        <div className="max-w-2xl text-center">
+          <div className="mb-12">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full border border-green-500/50 bg-green-500/10 mb-8">
+              <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
             </div>
-        </main>
-    );
+            
+            <h1 className="text-5xl font-light mb-6">
+              Payment
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-500">
+                confirmed
+              </span>
+            </h1>
+            
+            <p className="text-xl text-gray-400 leading-loose">
+              Your transaction was successful.
+              <br />
+              Check your Telegram for access details.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link 
+              href="/marketplace"
+              className="px-8 py-3 bg-white text-black rounded-full hover:bg-gray-100 transition-colors font-medium tracking-wider uppercase text-sm"
+            >
+              Browse More
+            </Link>
+            <Link 
+              href="/"
+              className="px-8 py-3 border border-gray-800 hover:border-gray-600 rounded-full transition-colors font-medium tracking-wider uppercase text-sm"
+            >
+              Home
+            </Link>
+          </div>
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="border-t border-gray-900 py-12 px-8">
+        <div className="container mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-gray-600">
+            <div className="flex items-center gap-3">
+              <Image src="/logo-v2.png" alt="Logo" width={32} height={32} className="opacity-40" />
+              <span>Patas4Land © 2026</span>
+            </div>
+            
+            <div className="flex items-center gap-8">
+              <Link href="https://twitter.com/patas4Land" target="_blank" className="hover:text-white transition-colors">
+                Twitter
+              </Link>
+              <Link href="https://t.me/pata_monad_bot" target="_blank" className="hover:text-white transition-colors">
+                Telegram
+              </Link>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
 }
 
 export default function SuccessPage() {
-    return (
-        <Suspense fallback={
-            <main className="min-h-screen bg-[#050505] flex items-center justify-center">
-                <div className="w-1 h-1 bg-[#8a1c1c] animate-pulse" />
-            </main>
-        }>
-            <SuccessContent />
-        </Suspense>
-    );
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+      </div>
+    }>
+      <SuccessContent />
+    </Suspense>
+  );
 }
