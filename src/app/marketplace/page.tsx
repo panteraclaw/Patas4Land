@@ -123,7 +123,7 @@ export default async function MarketplacePage() {
                   {/* Buy button - links to Telegram bot */}
                   <div className="pt-2">
                     <a
-                      href={`https://t.me/Patas4Land_bot?start=buy_${item.id}`}
+                      href={`https://t.me/pata_monad_bot?start=buy_${item.id}`}
                       target="_blank"
                       className="block w-full text-center bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 rounded-lg hover:from-purple-500 hover:to-pink-500 transition-all font-semibold"
                     >
@@ -145,7 +145,7 @@ export default async function MarketplacePage() {
             Send a photo + price to our bot and start selling instantly
           </p>
           <a
-            href="https://t.me/Patas4Land_bot"
+            href="https://t.me/pata_monad_bot"
             target="_blank"
             className="inline-block px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-500 font-semibold"
           >
