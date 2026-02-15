@@ -16,6 +16,8 @@ async function getListings() {
         imageUrl: listings.imageUrl,
         thumbnailUrl: listings.thumbnailUrl,
         price: listings.price,
+        category: listings.category,
+        sellerAlias: listings.sellerAlias,
         tags: listings.tags,
         status: listings.status,
         views: listings.views,
@@ -23,6 +25,7 @@ async function getListings() {
         createdAt: listings.createdAt,
         sellerUsername: users.telegramUsername,
         sellerWallet: users.monadWallet,
+        userAlias: users.alias,
       })
       .from(listings)
       .leftJoin(users, eq(listings.sellerId, users.id))
@@ -55,7 +58,7 @@ export default async function MarketplacePage() {
         </div>
 
         {/* Filters */}
-        <div className="mb-8 flex gap-4">
+        <div className="mb-8 flex gap-4 flex-wrap">
           <button className="px-6 py-2 bg-purple-700 text-white rounded-lg hover:bg-purple-600">
             All
           </button>
@@ -95,6 +98,12 @@ export default async function MarketplacePage() {
                   <div className="absolute bottom-2 right-2 bg-black/60 px-2 py-1 rounded text-xs text-white">
                     🔒 Buy to unlock HD
                   </div>
+                  {/* Category badge */}
+                  {item.category && (
+                    <div className="absolute top-2 left-2 bg-purple-600/80 px-2 py-1 rounded text-xs text-white">
+                      {item.category}
+                    </div>
+                  )}
                 </div>
 
                 {/* Info */}
@@ -104,8 +113,8 @@ export default async function MarketplacePage() {
                       {item.price} MON
                     </span>
                     {item.tags && Array.isArray(item.tags) && (
-                      <div className="flex gap-1">
-                        {(item.tags as string[]).map((tag: string, i: number) => (
+                      <div className="flex gap-1 flex-wrap justify-end">
+                        {(item.tags as string[]).slice(0, 3).map((tag: string, i: number) => (
                           <span key={i} className="text-xs bg-purple-900 text-purple-200 px-2 py-0.5 rounded">
                             {tag}
                           </span>
@@ -115,7 +124,7 @@ export default async function MarketplacePage() {
                   </div>
 
                   <div className="text-xs text-purple-300">
-                    Seller: {item.sellerUsername || 'Anonymous'}
+                    Seller: {item.sellerAlias || item.userAlias || 'Anonymous'}
                   </div>
 
                   <div className="flex justify-between text-xs text-slate-400">
